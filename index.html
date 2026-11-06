@@ -132,20 +132,29 @@ footer a{color:#8ab4ff;cursor:pointer;display:block;padding:2px 0;text-decoratio
 .add{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-size:22px;font-weight:700;line-height:1;box-shadow:0 6px 12px rgba(23,105,255,.35);flex:none}
 .more{color:var(--blue);font-size:13px;font-weight:600}
 .chip{background:var(--card);border:1px solid var(--line);box-shadow:0 2px 8px rgba(23,105,255,.06)}.chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-.bnav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;z-index:35;display:flex;justify-content:space-between;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px;box-shadow:0 10px 30px rgba(23,105,255,.20)}
-.nb{display:flex;align-items:center;gap:0;transition:background .3s,padding .35s cubic-bezier(.3,.9,.3,1);border-radius:999px;font-weight:700;font-size:14px;color:var(--ink)}
-.nb i{position:relative;font-style:normal;width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:20px;box-shadow:0 6px 14px rgba(23,105,255,.35)}
-.nb i{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
-.nb span{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;margin-left:0;transition:max-width .4s cubic-bezier(.3,.9,.3,1),opacity .3s,margin .3s}
-.nb.on{background:var(--soft);padding-right:16px}.nb.on span{max-width:96px;opacity:1;margin-left:8px}
-.nb.on i{animation:bump .55s cubic-bezier(.3,1.4,.5,1)}.nb:active i{transform:scale(.86)}
-.bnav{animation:navin .8s 2.9s cubic-bezier(.2,.9,.25,1.1) both}
 @keyframes bump{0%{transform:scale(.8)}50%{transform:scale(1.2) translateY(-5px)}100%{transform:scale(1)}}
 @keyframes navin{from{transform:translateY(130%);opacity:0}to{transform:none;opacity:1}}
 .lo{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:12px;padding:9px 12px;font-weight:700;font-size:13px;flex:none}
-.nb .badge{background:#ef4444;color:#fff;top:-3px;right:-3px}
 .fab{bottom:calc(92px + env(safe-area-inset-bottom,0px));width:50px;height:50px;font-size:24px}
 #toast{bottom:104px}
+/* ===== Liquid Glass nav ===== */
+.bnav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;z-index:35;display:flex;gap:10px;align-items:center;animation:navin .8s 2.9s cubic-bezier(.2,.9,.25,1.1) both}
+.pill,.sbtn{background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%);border:1px solid rgba(255,255,255,.75);box-shadow:0 12px 32px rgba(10,30,80,.20),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3);color:#1f2937}
+.pill{position:relative;flex:1;display:flex;padding:5px;border-radius:999px}
+.sbtn{width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.sbtn:active{transform:scale(.9)}.sbtn svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.lens{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/4);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.38));border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 2px #fff,inset 0 -8px 14px rgba(23,105,255,.14),0 6px 18px rgba(23,105,255,.28);transform:translateX(calc(var(--i,0)*100%));transition:transform .6s cubic-bezier(.3,1.45,.5,1),opacity .3s}
+.pill.none .lens{opacity:0}
+.pill{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.pill.press .lens{transform:translateX(calc(var(--i,0)*100%)) scale(1.14,1.1);box-shadow:inset 0 1px 2px #fff,inset 0 -8px 14px rgba(23,105,255,.18),0 10px 24px rgba(23,105,255,.38)}
+.pill.drag .lens{opacity:1;transition:box-shadow .2s;transform:translateX(var(--x,0px)) scale(1.16,1.12);box-shadow:inset 0 1px 2px #fff,inset 0 -8px 14px rgba(23,105,255,.2),0 12px 28px rgba(23,105,255,.42)}
+.pill.drag .nb{color:inherit}.pill.drag .nb.hot{color:var(--blue)}.pill.drag .nb.hot svg{transform:scale(1.16)}
+.nb{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 0 8px;font-size:11px;font-weight:600;color:inherit;transition:color .3s}
+.nb svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
+.nb.on{color:var(--blue)}.nb.on svg{transform:scale(1.14)}.nb:active svg{transform:scale(.86)}
+.nb .badge{background:#ef4444;color:#fff;top:3px;right:calc(50% - 23px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill,:root:not([data-theme="light"]) .sbtn{background:rgba(32,38,54,.5);border-color:rgba(255,255,255,.2);color:#e8edf5;box-shadow:0 12px 32px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}:root:not([data-theme="light"]) .lens{background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.08));border-color:rgba(255,255,255,.4)}:root:not([data-theme="light"]) .nb.on{color:#7db2ff}}
+
 .srvst{display:none;margin-top:10px;font-size:14px}.srv .srvst{display:block}.srv .manual{display:none}
 .f.ck{display:flex;align-items:center;gap:8px;font-weight:600}.f.ck input{width:20px;height:20px;padding:0}
 #dlg{position:fixed;inset:0;background:rgba(13,17,23,.55);z-index:70;display:none;align-items:center;justify-content:center;padding:24px}#dlg.show{display:flex;animation:fade .25s both}
@@ -188,19 +197,19 @@ footer a{color:#8ab4ff;cursor:pointer;display:block;padding:2px 0;text-decoratio
   <div><h4>Kontak</h4><a id="fwa" target="_blank" rel="noopener">WhatsApp</a><a id="fsp" target="_blank" rel="noopener">Toko Shopee</a><p style="margin-top:8px">Senin–Sabtu, 09.00–21.00</p></div>
 </div></footer>
 <a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Chat WhatsApp">💬</a>
-<nav class="bnav" aria-label="Menu utama">
- <button class="nb" data-r="home" onclick="go('home')"><i>🏠</i><span>Beranda</span></button>
- <button class="nb" data-r="cart" onclick="go('cart')"><i>🛍<b class="badge cbd"></b></i><span>Keranjang</span></button>
- <button class="nb" data-r="wishlist" onclick="go('wishlist')"><i>♥<b class="badge wbd"></b></i><span>Favorit</span></button>
- <button class="nb" data-r="account" onclick="go('account')"><i>👤</i><span>Saya</span></button>
-</nav>
+<nav class="bnav" aria-label="Menu utama"><div class="pill"><span class="lens"></span>
+ <button class="nb" data-r="home" onclick="go('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Beranda</span></button>
+ <button class="nb" data-r="cart" onclick="go('cart')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><b class="badge cbd"></b><span>Keranjang</span></button>
+ <button class="nb" data-r="wishlist" onclick="go('wishlist')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-9-9.2C1.8 7.5 3.7 4.5 6.8 4.5c2 0 3.5 1.1 5.2 3 1.7-1.9 3.2-3 5.2-3 3.1 0 5 3 3.8 6.3C19 15.4 12 20 12 20z"/></svg><b class="badge wbd"></b><span>Favorit</span></button>
+ <button class="nb" data-r="account" onclick="go('account')"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Saya</span></button>
+</div><button class="sbtn" onclick="document.getElementById('q').focus()" aria-label="Cari produk"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button></nav>
 <div id="dlg"></div>
 <div id="toast"></div>
 
 <script>
 /* ===== KONFIGURASI – ganti dengan data toko Anda ===== */
 const CONFIG={
-  WA_NUMBER:"6282325686521",           // format internasional tanpa +, contoh 6281234567890
+  WA_NUMBER:"6281234567890",           // format internasional tanpa +, contoh 6281234567890
   SHOPEE_URL:"https://shopee.co.id/",  // tautan toko/produk Shopee AksesorisKu
   /* tautan Shopee per produk (opsional): isi SHOPEE_PRODUCT[id]="https://shopee.co.id/..." */
   SHOPEE_PRODUCT:{},
@@ -443,15 +452,34 @@ function accountPage(){
 const notFound=()=>`<div class="empty"><div class="e">😕</div><p>Halaman tidak ditemukan</p><br><button class="btn" onclick="go('home')">Ke Beranda</button></div>`;
 /* ===== ROUTER ===== */
 function go(r){location.hash=r}
+function navLens(){const n=[...document.querySelectorAll(".nb")],i=n.findIndex(b=>b.classList.contains("on")),p=document.querySelector(".pill");if(p){p.style.setProperty("--i",Math.max(i,0));p.classList.toggle("none",i<0)}}
 function render(){
   const h=(location.hash||"#home").slice(1);let html;
   if(h==="home")html=home();else if(h.startsWith("product-"))html=product(h.slice(8));
   else if(h==="cart")html=cartPage();else if(h==="checkout")html=checkout();
   else if(h==="wishlist")html=wishPage();else if(h==="account")html=accountPage();else if(h==="admin")html=`<div id="adm"></div>`;else html=notFound();
-  const y=scrollY;$("#app").innerHTML=html;document.querySelectorAll(".nb").forEach(b=>b.classList.toggle("on",b.dataset.r===(h.startsWith("product-")?"home":h)));badges();if(h==="admin")adminInit();if(h==="account")syncOrders();
+  const y=scrollY;$("#app").innerHTML=html;document.querySelectorAll(".nb").forEach(b=>b.classList.toggle("on",b.dataset.r===(h.startsWith("product-")?"home":h)));navLens();badges();if(h==="admin")adminInit();if(h==="account")syncOrders();
   if(render.last!==h){scrollTo(0,0);render.last=h}else scrollTo(0,y);
 }
 addEventListener("hashchange",()=>{showLoad();});
+/* geser gelembung kaca pada navigasi bawah */
+(function(){const pill=document.querySelector(".pill");if(!pill)return;
+let down=0,moved=0,sx=0,sy=0,lx=0,pid=0,hot=-1;const T=()=>[...pill.querySelectorAll(".nb")];
+const at=x=>{const r=pill.getBoundingClientRect(),w=(r.width-10)/4,f=Math.max(0,Math.min(3*w,x-r.left-5-w/2));return{f,i:Math.round(f/w)}};
+const cur=()=>parseInt(pill.style.getPropertyValue("--i"))||0;
+function finish(){if(!down)return;down=0;pill.classList.remove("press");
+  if(moved){const i=at(lx).i;pill.classList.remove("drag");T().forEach(b=>b.classList.remove("hot"));hot=-1;pill.style.setProperty("--i",i);pill.classList.remove("none");const b=T()[i];if(b)b.click()}
+  moved=0}
+pill.addEventListener("pointerdown",e=>{down=1;moved=0;sx=lx=e.clientX;sy=e.clientY;pid=e.pointerId;if(at(e.clientX).i===cur())pill.classList.add("press")});
+pill.addEventListener("pointermove",e=>{if(!down||e.pointerId!==pid)return;lx=e.clientX;
+  if(!moved){if(Math.abs(e.clientX-sx)<6)return;moved=1;pill.classList.remove("press");pill.classList.add("drag");try{pill.setPointerCapture(pid)}catch(_){}}
+  const a=at(lx);pill.style.setProperty("--x",a.f+"px");
+  if(a.i!==hot){hot=a.i;T().forEach((b,k)=>b.classList.toggle("hot",k===hot))}});
+["pointerup","pointercancel","lostpointercapture"].forEach(t=>pill.addEventListener(t,finish));
+document.addEventListener("pointerup",finish);
+pill.addEventListener("touchmove",e=>{const t=e.touches[0];if(t&&Math.abs(t.clientX-sx)>6&&Math.abs(t.clientX-sx)>Math.abs(t.clientY-sy))e.preventDefault()},{passive:false});
+pill.addEventListener("touchend",finish);pill.addEventListener("touchcancel",finish);
+})();
 function showLoad(){
   $("#app").innerHTML=`<div class="grid" style="margin-top:24px">${'<div class="skel"></div>'.repeat(4)}</div>`;
   setTimeout(render,180);
